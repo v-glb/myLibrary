@@ -28,8 +28,8 @@ document.getElementById('book-form').addEventListener('submit', (e) => {
 
 // Close window with ESCAPE key
 
-$(document).keydown(function(e) {
-    if (e.keyCode == 27) {
-        window.close();
-    }
-});
+window.onkeydown = e => {
+  if (event.keyCode == 27) {
+    window.close();
+  }
+};

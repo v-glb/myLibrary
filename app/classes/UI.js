@@ -14,10 +14,10 @@ class UI {
 
     const row = document.createElement('tr');
     row.innerHTML = `
-            <td>${book.title}</td>
-            <td>${book.author}</td>
-            <td>${book.isbn}</td>
-            <td><a href="#" class="btn btn-danger btn-sm delete">X</a></td>
+            <td id="title">${book.title}</td>
+            <td id="author">${book.author}</td>
+            <td id="isbn">${book.isbn}</td>
+            <td id="delete"><a href="#" class="btn btn-danger btn-sm delete">X</a></td>
         `;
 
     list.appendChild(row);
@@ -29,15 +29,43 @@ class UI {
     }
   }
 
-  // TODO: Add function for showing success/error message
-  showAlert() {
-
+  showAlert(message) {
+    M.toast({ html: message })
   }
 
-  clearFields() {
-    document.getElementById('title').value = '';
-    document.getElementById('author').value = '';
-    document.getElementById('isbn').value = '';
+  searchBook(pattern) {
+    // Remove previous search results
+    const row = document.getElementById('book-list');
+    while (row.firstChild) {
+      row.removeChild(row.firstChild);
+    }
+
+    const books = storage.getBooks();
+
+    // Show "nothing found" message if this counter is not increasing
+    let bookFound = 0;
+
+    books.forEach((book) => {
+      if (book.title.includes(pattern) || book.author.includes(pattern) ||
+        book.isbn.includes(pattern)) {
+
+        this.addBookToList(book);
+        bookFound++;
+      }
+    });
+
+    if (bookFound === 0) {
+      this.showAlert('No books found!');
+    }
+  }
+
+  updateTotalBooks() {
+    const totalBooks = storage.getBooks().length;
+    document.getElementById('total-books-counter').innerHTML = totalBooks;
+  }
+
+  updateLentBooks() {
+    // TODO: Display books which are lent
   }
 }
 

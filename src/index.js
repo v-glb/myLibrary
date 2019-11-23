@@ -83,7 +83,6 @@ function createAddBookWindow() {
 
 
 ipcMain.on('book:add', (e, newBook) => {
-  console.log('Got book:add');
   mainWindow.webContents.send('book:add', newBook);
   addBookWindow.close();
 })

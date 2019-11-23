@@ -12,16 +12,33 @@ const storage = new store.Store();
 
 
 
-
-
-
 // EVENT LISTENERS for index.html
 
-window.addEventListener('DOMContentLoaded', (event) => {
-  userInterface.displayBooks();
-  console.log('DOM fully loaded and parsed');
+// window.addEventListener('DOMContentLoaded', (event) => {
+//   userInterface.displayBooks();
+//   console.log('DOM fully loaded and parsed');
+// });
+
+// Handle search for book
+document.getElementById('search-book-form').addEventListener('submit', (e) => {
+  // Prevent actual submit
+  e.preventDefault();
+
+  // Get form value
+  const searchPattern = document.getElementById('pattern').value;
+
+  // TODO: Implement show alert
+  if (searchPattern === '') {
+    userInterface.showAlert('Empty input!');
+  } else {
+    userInterface.searchBook(searchPattern);
+  }
 });
 
+// Display total books in cards on first loading of page
+window.addEventListener('DOMContentLoaded', (e) => {
+  userInterface.updateTotalBooks();
+});
 
 // ipcMain signals handling
 ipcRenderer.on('book:add', (e, newBook) => {
@@ -29,6 +46,5 @@ ipcRenderer.on('book:add', (e, newBook) => {
   storage.addBook(newBook);
 
   // Render new Book in html
-  userInterface.addBookToList(newBook);
-  console.log('Done!');
+  userInterface.updateTotalBooks();
 });

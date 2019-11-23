@@ -67,6 +67,27 @@ class UI {
   updateLentBooks() {
     // TODO: Display books which are lent
   }
+
+  updateRecentlyAddedBooks() {
+    const recentBooksList = document.getElementById('recent-books-list');
+
+    // Get recently added books as objects
+    const recentBooks = storage.getRecentlyAddedBooks(5);
+
+    // Clear last results
+    recentBooksList.innerHTML = '';
+
+    recentBooks.forEach((book) => {
+
+      // Create single list element with class 'collection-item' for each book
+      let li = document.createElement('li');
+      li.setAttribute('class', 'collection-item');
+      li.innerHTML = `'${book.title}' by ${book.author}`;
+
+      // Append list elements to ul
+      recentBooksList.appendChild(li);
+    });
+  }
 }
 
 module.exports.UI = UI;

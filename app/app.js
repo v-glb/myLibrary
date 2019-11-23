@@ -37,7 +37,11 @@ document.getElementById('search-book-form').addEventListener('submit', (e) => {
 
 // Display total books in cards on first loading of page
 window.addEventListener('DOMContentLoaded', (e) => {
+  // Render card showing total books in posession
   userInterface.updateTotalBooks();
+
+  // Render card showing recently added books
+  userInterface.updateRecentlyAddedBooks();
 });
 
 // ipcMain signals handling
@@ -47,4 +51,7 @@ ipcRenderer.on('book:add', (e, newBook) => {
 
   // Render new Book in html
   userInterface.updateTotalBooks();
+
+  // Update recently added books
+  userInterface.updateRecentlyAddedBooks(5);
 });

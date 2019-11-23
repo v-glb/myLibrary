@@ -28,6 +28,28 @@ class Store {
 
     localStorage.setItem('books', JSON.stringify(books));
   }
+
+  getRecentlyAddedBooks(numberOfBooks) {
+    // Return last n added books
+    const books = this.getBooks();
+    let recentBooks = [];
+
+    // How many 'recently added' to return
+    let bookCounter = 1;
+
+    for (let i = books.length - 1; i >= 0; i--) {
+      const element = books[i];
+      recentBooks.push(element);
+
+      if (bookCounter === numberOfBooks) {
+        break;
+      }
+
+      bookCounter++;
+    }
+    
+    return recentBooks;
+  }
 }
 
 module.exports.Store = Store;

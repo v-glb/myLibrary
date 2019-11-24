@@ -17,3 +17,7 @@ body {
 .icon-block .material-icons {
   font-size: inherit;
 }
+
+.card-scrollable {
+  overflow: auto !important;
+}

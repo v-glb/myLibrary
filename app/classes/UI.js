@@ -17,7 +17,7 @@ class UI {
             <td id="title">${book.title}</td>
             <td id="author">${book.author}</td>
             <td id="isbn">${book.isbn}</td>
-            <td id="delete"><a href="#" class="btn btn-danger btn-sm delete">X</a></td>
+            <td id="delete"><a href="#" class="btn delete">X</a></td>
         `;
 
     list.appendChild(row);
@@ -29,7 +29,7 @@ class UI {
     }
   }
 
-  showAlert(message) {
+  showToast(message) {
     M.toast({ html: message })
   }
 
@@ -55,7 +55,7 @@ class UI {
     });
 
     if (bookFound === 0) {
-      this.showAlert('No books found!');
+      this.showToast('No books found!');
     }
   }
 

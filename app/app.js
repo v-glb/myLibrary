@@ -12,12 +12,21 @@ const storage = new store.Store();
 
 
 
-// EVENT LISTENERS for index.html
+// #################################################################
+//
+//                EVENT LISTENERS HANDLING
+//
+// #################################################################
 
-// window.addEventListener('DOMContentLoaded', (event) => {
-//   userInterface.displayBooks();
-//   console.log('DOM fully loaded and parsed');
-// });
+// Display total books in cards on first loading of page
+window.addEventListener('DOMContentLoaded', (e) => {
+  // Render card showing total books in posession
+  userInterface.updateTotalBooks();
+
+  // Render card showing recently added books
+  userInterface.updateRecentlyAddedBooks();
+});
+
 
 // Handle search for book
 document.getElementById('search-book-form').addEventListener('submit', (e) => {
@@ -29,25 +38,43 @@ document.getElementById('search-book-form').addEventListener('submit', (e) => {
 
   // TODO: Implement show alert
   if (searchPattern === '') {
-    userInterface.showAlert('Empty input!');
+    userInterface.showToast('Empty input!');
   } else {
     userInterface.searchBook(searchPattern);
   }
 });
 
-// Display total books in cards on first loading of page
-window.addEventListener('DOMContentLoaded', (e) => {
-  // Render card showing total books in posession
-  userInterface.updateTotalBooks();
+// Handle remove a book
+document.getElementById('book-list').addEventListener('click', (e) => {
+  // Remove Book from UI
+  userInterface.deleteBook(e.target);
 
-  // Render card showing recently added books
-  userInterface.updateRecentlyAddedBooks();
+  // Remove Book from Local Storage
+  // Get ISBN from e.target via DOM traversing!
+  storage.removeBook(e.target.parentElement.previousElementSibling.textContent);
+
+  userInterface.showToast('Book removed!');
+
+  // Update card stats
+  userInterface.updateTotalBooks();
+  userInterface.updateRecentlyAddedBooks(5);
 });
 
-// ipcMain signals handling
+
+
+
+// #################################################################
+//
+//                        IPC HANDLING
+//
+// #################################################################
+
 ipcRenderer.on('book:add', (e, newBook) => {
   // Add new Book to local storage
   storage.addBook(newBook);
+
+  // Show success toast
+  userInterface.showToast('Book added!');
 
   // Render new Book in html
   userInterface.updateTotalBooks();

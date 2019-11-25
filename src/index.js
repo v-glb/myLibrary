@@ -9,6 +9,7 @@ if (require('electron-squirrel-startup')) { // eslint-disable-line global-requir
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
 let addBookWindow;
+let editBookWindow;
 
 const createWindow = () => {
   // Create the browser window.
@@ -81,13 +82,41 @@ function createAddBookWindow() {
   addBookWindow.on('closed', () => addBookWindow = null);
 }
 
+function createEditBookWindow() {
+  editBookWindow = new BrowserWindow({
+    width: 600,
+    height: 400,
+    title: 'Edit Book',
+    webPreferences: { nodeIntegration: true }
+  });
+
+  // and load the index.html of the app.
+  editBookWindow.loadURL(`file://${__dirname}/../html/editBook.html`);
+
+  // Dereference / Garbage Collection of addBookWindow on close
+  editBookWindow.on('closed', () => editBookWindow = null);
+
+}
+
+
+// ###################################################################
+// 
+//                        IPC HANDLING
+//
+// ###################################################################
 
 ipcMain.on('book:add', (e, newBook) => {
   mainWindow.webContents.send('book:add', newBook);
   addBookWindow.close();
-})
+});
 
-// Custom menu template
+
+// ###################################################################
+// 
+//                    MENU DEFINITIONS
+//
+// ###################################################################
+
 const menuTemplate = [
   {
     label: 'File',

@@ -17,7 +17,12 @@ class UI {
             <td id="title">${book.title}</td>
             <td id="author">${book.author}</td>
             <td id="isbn">${book.isbn}</td>
-            <td id="delete"><a href="#" class="btn delete">X</a></td>
+            <td id="edit">
+              <a id="edit-button" class="waves-effect waves-light btn edit">edit</a>
+            </td>
+            <td>
+              <a id="delete-button" class="waves-effect waves-light btn delete">X</a>
+            </td>
         `;
 
     list.appendChild(row);

@@ -25,18 +25,24 @@ window.addEventListener('DOMContentLoaded', (e) => {
 
   // Render card showing recently added books
   userInterface.updateRecentlyAddedBooks();
+
+  // Display all books
+  userInterface.displayBooks();
+
+  // Render calendar
+  // TODO: Implement calendar!
+
 });
 
 
 // Handle search for book
-document.getElementById('search-book-form').addEventListener('submit', (e) => {
+document.getElementById('search-book-form').addEventListener('submit', e => {
   // Prevent actual submit
   e.preventDefault();
 
   // Get form value
   const searchPattern = document.getElementById('pattern').value;
 
-  // TODO: Implement show alert
   if (searchPattern === '') {
     userInterface.showToast('Empty input!');
   } else {
@@ -45,22 +51,32 @@ document.getElementById('search-book-form').addEventListener('submit', (e) => {
 });
 
 // Handle remove a book
-document.getElementById('book-list').addEventListener('click', (e) => {
-  // Remove Book from UI
-  userInterface.deleteBook(e.target);
+document.getElementById('book-list').addEventListener('click', e => {
 
-  // Remove Book from Local Storage
-  // Get ISBN from e.target via DOM traversing!
-  storage.removeBook(e.target.parentElement.previousElementSibling.textContent);
+  // Handle Edit and Delete Button clicking
+  if (e.target.classList.contains('delete')) {
 
-  userInterface.showToast('Book removed!');
+    // Remove Book from UI
+    userInterface.deleteBook(e.target);
 
-  // Update card stats
-  userInterface.updateTotalBooks();
-  userInterface.updateRecentlyAddedBooks(5);
+    // Remove Book from Local Storage
+    // Get ISBN from e.target via DOM traversing!
+    storage.removeBook(e.target.parentElement.previousElementSibling.previousElementSibling.textContent);
+
+    userInterface.showToast('Book removed!');
+
+    // Update card stats
+    userInterface.updateTotalBooks();
+    userInterface.updateRecentlyAddedBooks(5);
+
+  } else if (e.target.classList.contains('edit')) {
+
+    console.log('Editing!');
+
+  } else {
+    console.log('error');
+  }
 });
-
-
 
 
 // #################################################################

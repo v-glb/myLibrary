@@ -10,6 +10,19 @@ const storage = new store.Store();
 // UI for showing Toasts
 const userInterface = new ui.UI();
 
+console.log('test');
+
 
 // EVENT LISTENERS
 
+
+// IPC HANDLING
+
+ipcRenderer.on('book:edit', (e, title, author, isbn) => {
+    console.log(title, author, isbn);
+
+    document.getElementById("title").value = title;
+    document.getElementById("author").value = author;
+    document.getElementById("isbn").value = isbn;
+
+});

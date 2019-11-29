@@ -73,9 +73,14 @@ document.getElementById('book-list').addEventListener('click', e => {
   } else if (e.target.classList.contains('edit')) {
     // TODO: Implement editing feature
 
-    ipcRenderer.send('book:edit');
+    // Get Book info to send via ipc
+    const title = e.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.textContent;
+    const author = e.target.parentElement.previousElementSibling.previousElementSibling.textContent;
+    const isbn = e.target.parentElement.previousElementSibling.textContent;
+
     console.log('Editing!');
 
+    ipcRenderer.send('book:edit', title, author, isbn);
   } else {
     // TODO: Implement proper error handling when clicking on whitespace in tr
 

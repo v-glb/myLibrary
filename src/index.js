@@ -110,8 +110,12 @@ ipcMain.on('book:add', (e, newBook) => {
   addBookWindow.close();
 });
 
-ipcMain.on('book:edit', e => {
+ipcMain.on('book:edit', (e, title, author, isbn) => {
   createEditBookWindow();
+
+  // Time needed for creating the edit window before we can send contents there
+  setTimeout(() => { editBookWindow.webContents.send('book:edit', title, author, isbn); }, 400);
+
 });
 
 

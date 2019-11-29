@@ -110,6 +110,10 @@ ipcMain.on('book:add', (e, newBook) => {
   addBookWindow.close();
 });
 
+ipcMain.on('book:edit', e => {
+  createEditBookWindow();
+});
+
 
 // ###################################################################
 // 

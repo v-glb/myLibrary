@@ -27,6 +27,7 @@ window.addEventListener('DOMContentLoaded', (e) => {
   userInterface.updateRecentlyAddedBooks();
 
   // Display all books
+  // TODO: Render only a part of books so card doesn't look so empty...
   userInterface.displayBooks();
 
   // Render calendar
@@ -70,10 +71,14 @@ document.getElementById('book-list').addEventListener('click', e => {
     userInterface.updateRecentlyAddedBooks(5);
 
   } else if (e.target.classList.contains('edit')) {
+    // TODO: Implement editing feature
 
+    ipcRenderer.send('book:edit');
     console.log('Editing!');
 
   } else {
+    // TODO: Implement proper error handling when clicking on whitespace in tr
+
     console.log('error');
   }
 });

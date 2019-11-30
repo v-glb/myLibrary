@@ -115,7 +115,11 @@ ipcMain.on('book:edit', (e, title, author, isbn) => {
 
   // Time needed for creating the edit window before we can send contents there
   setTimeout(() => { editBookWindow.webContents.send('book:edit', title, author, isbn); }, 400);
+});
 
+ipcMain.on('book:editDone', e => {
+  mainWindow.webContents.send('book:editDone');
+  editBookWindow.close();
 });
 
 

@@ -78,8 +78,6 @@ document.getElementById('book-list').addEventListener('click', e => {
     const author = e.target.parentElement.previousElementSibling.previousElementSibling.textContent;
     const isbn = e.target.parentElement.previousElementSibling.textContent;
 
-    console.log('Editing!');
-
     ipcRenderer.send('book:edit', title, author, isbn);
   } else {
     // TODO: Implement proper error handling when clicking on whitespace in tr
@@ -106,5 +104,13 @@ ipcRenderer.on('book:add', (e, newBook) => {
   userInterface.updateTotalBooks();
 
   // Update recently added books
+  userInterface.updateRecentlyAddedBooks(5);
+});
+
+ipcRenderer.on('book:editDone', e => { 
+  userInterface.showToast('Book edited!');
+
+  userInterface.displayBooks();
+
   userInterface.updateRecentlyAddedBooks(5);
 });

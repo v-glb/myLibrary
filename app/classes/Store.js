@@ -23,10 +23,39 @@ class Store {
     books.forEach((book, index) => {
       if (book.isbn === isbn) {
         books.splice(index, 1);
-      } 
+      }
     });
 
     localStorage.setItem('books', JSON.stringify(books));
+  }
+
+  editBook(title, author, isbn) {
+    const books = this.getBooks();
+    const bookIndex = this.getIndexOfBook(isbn);
+    
+    books[bookIndex].title = title; 
+    books[bookIndex].author=  author;
+    books[bookIndex].isbn =  isbn;
+
+    localStorage.setItem('books', JSON.stringify(books));
+  }
+
+  getIndexOfBook(isbn) {
+    const books = this.getBooks();
+    let bookIndex;
+
+    for (let i = 0; i < books.length; i++) {
+      const book = books[i];
+
+      if (book.isbn === isbn) {
+        bookIndex = i;
+        break;
+      }
+
+      bookIndex++;
+    }
+
+    return bookIndex;
   }
 
   getRecentlyAddedBooks(numberOfBooks) {
@@ -47,7 +76,7 @@ class Store {
 
       bookCounter++;
     }
-    
+
     return recentBooks;
   }
 }

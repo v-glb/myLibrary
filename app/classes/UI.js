@@ -5,6 +5,10 @@ const storage = new store.Store();
 
 class UI {
   displayBooks() {
+    // Clear old entries
+    const list = document.getElementById('book-list');
+    list.innerHTML = '';
+
     const books = storage.getBooks();
     books.forEach((book) => this.addBookToList(book));
   }

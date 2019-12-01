@@ -10,23 +10,29 @@ const storage = new store.Store();
 // UI for showing Toasts
 const userInterface = new ui.UI();
 
+// Save value of old ISBN so book can be found 
+let oldIsbn;
 
 // EVENT LISTENERS
 
-document.getElementById('book-form').addEventListener('submit', (e) => {
+document.getElementById('book-form').addEventListener('submit', e => {
     // Prevent actual submit
     e.preventDefault();
+    
+    console.log(`old isbn: ${oldIsbn}`);
 
     // Get form values
     const title = document.getElementById('title').value;
     const author = document.getElementById('author').value;
-    const isbn = document.getElementById('isbn').value;
+    const newIsbn = document.getElementById('isbn').value;
+
+    console.log(`new isbn: ${newIsbn}`);
 
     // Validate form input
     if (title === '' || author === '' || isbn === '') {
         userInterface.showToast('Please fill in all fields!');
     } else {
-        storage.editBook(title, author, isbn);
+        storage.editBook(oldIsbn, title, author, newIsbn);
 
         // Send ipc to mainProcess to get this editBookWindow closed after edit
         ipcRenderer.send('book:editDone')
@@ -47,4 +53,7 @@ ipcRenderer.on('book:edit', (e, title, author, isbn) => {
     document.getElementById("title").value = title;
     document.getElementById("author").value = author;
     document.getElementById("isbn").value = isbn;
+
+    // Handle case if isbn gets edited
+    oldIsbn = document.getElementById('isbn').value;
 });

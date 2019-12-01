@@ -29,13 +29,13 @@ class Store {
     localStorage.setItem('books', JSON.stringify(books));
   }
 
-  editBook(title, author, isbn) {
+  editBook(oldIsbn, title, author, newIsbn) {
     const books = this.getBooks();
-    const bookIndex = this.getIndexOfBook(isbn);
+    const bookIndex = this.getIndexOfBook(oldIsbn);
     
     books[bookIndex].title = title; 
     books[bookIndex].author=  author;
-    books[bookIndex].isbn =  isbn;
+    books[bookIndex].isbn =  newIsbn;
 
     localStorage.setItem('books', JSON.stringify(books));
   }

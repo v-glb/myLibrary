@@ -18,15 +18,11 @@ let oldIsbn;
 document.getElementById('book-form').addEventListener('submit', e => {
     // Prevent actual submit
     e.preventDefault();
-    
-    console.log(`old isbn: ${oldIsbn}`);
 
     // Get form values
     const title = document.getElementById('title').value;
     const author = document.getElementById('author').value;
     const newIsbn = document.getElementById('isbn').value;
-
-    console.log(`new isbn: ${newIsbn}`);
 
     // Validate form input
     if (title === '' || author === '' || isbn === '') {

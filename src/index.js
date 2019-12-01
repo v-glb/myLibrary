@@ -72,6 +72,7 @@ function createAddBookWindow() {
     width: 600,
     height: 400,
     title: 'Add New Book',
+    frame: false,
     webPreferences: { nodeIntegration: true }
   });
 
@@ -87,6 +88,7 @@ function createEditBookWindow() {
     width: 600,
     height: 400,
     title: 'Edit Book',
+    frame: false,
     webPreferences: { nodeIntegration: true }
   });
 

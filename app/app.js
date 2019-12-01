@@ -23,6 +23,9 @@ window.addEventListener('DOMContentLoaded', (e) => {
   // Render card showing total books in posession
   userInterface.updateTotalBooks();
 
+  // Render card showing lent books
+  userInterface.updateLentBooks();
+
   // Render card showing recently added books
   userInterface.updateRecentlyAddedBooks();
 
@@ -54,7 +57,7 @@ document.getElementById('search-book-form').addEventListener('submit', e => {
 // Handle remove a book
 document.getElementById('book-list').addEventListener('click', e => {
 
-  // Handle Edit and Delete Button clicking
+  // Delete book from UI and localStorage
   if (e.target.classList.contains('delete')) {
 
     // Remove Book from UI
@@ -62,7 +65,7 @@ document.getElementById('book-list').addEventListener('click', e => {
 
     // Remove Book from Local Storage
     // Get ISBN from e.target via DOM traversing!
-    storage.removeBook(e.target.parentElement.previousElementSibling.previousElementSibling.textContent);
+    storage.removeBook(e.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.textContent);
 
     userInterface.showToast('Book removed!');
 
@@ -70,15 +73,26 @@ document.getElementById('book-list').addEventListener('click', e => {
     userInterface.updateTotalBooks();
     userInterface.updateRecentlyAddedBooks(5);
 
+    // Launch book edit window
   } else if (e.target.classList.contains('edit')) {
-    // TODO: Implement editing feature
 
-    // Get Book info to send via ipc
-    const title = e.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.textContent;
-    const author = e.target.parentElement.previousElementSibling.previousElementSibling.textContent;
-    const isbn = e.target.parentElement.previousElementSibling.textContent;
+    // Get Book info via DOM traversing to send via ipc
+    const title = e.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.textContent;
+    const author = e.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.textContent;
+    const isbn = e.target.parentElement.previousElementSibling.previousElementSibling.textContent;
 
     ipcRenderer.send('book:edit', title, author, isbn);
+
+    // Toggle book availabilty
+  } else if (e.target.classList.contains('available')) {
+    const isbn = e.target.parentElement.previousElementSibling.textContent;
+
+    storage.toggleBookAvailability(isbn);
+
+    // Update UI
+    userInterface.displayBooks();
+    userInterface.updateLentBooks();
+
   } else {
     // TODO: Implement proper error handling when clicking on whitespace in tr
 
@@ -107,7 +121,7 @@ ipcRenderer.on('book:add', (e, newBook) => {
   userInterface.updateRecentlyAddedBooks(5);
 });
 
-ipcRenderer.on('book:editDone', e => { 
+ipcRenderer.on('book:editDone', e => {
   userInterface.showToast('Book edited!');
 
   userInterface.displayBooks();

@@ -11,6 +11,21 @@ class Store {
     return books;
   }
 
+  getLentBooks() {
+    const totalBooks = this.getBooks();
+    let lentBooksCounter = 0;
+
+    totalBooks.forEach((book) => {
+
+      if (book.available === false) {
+        lentBooksCounter++;
+      }
+
+    });
+
+    return lentBooksCounter;
+  }
+
   addBook(book) {
     const books = this.getBooks();
     books.push(book);
@@ -32,10 +47,10 @@ class Store {
   editBook(oldIsbn, title, author, newIsbn) {
     const books = this.getBooks();
     const bookIndex = this.getIndexOfBook(oldIsbn);
-    
-    books[bookIndex].title = title; 
-    books[bookIndex].author=  author;
-    books[bookIndex].isbn =  newIsbn;
+
+    books[bookIndex].title = title;
+    books[bookIndex].author = author;
+    books[bookIndex].isbn = newIsbn;
 
     localStorage.setItem('books', JSON.stringify(books));
   }
@@ -78,6 +93,17 @@ class Store {
     }
 
     return recentBooks;
+  }
+
+  toggleBookAvailability(isbn) {
+    const books = this.getBooks();
+    const bookIndex = this.getIndexOfBook(isbn);
+
+    books[bookIndex].available === true ? books[bookIndex].available = false :
+      books[bookIndex].available = true;
+
+    localStorage.setItem('books', JSON.stringify(books));
+
   }
 }
 

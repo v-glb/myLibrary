@@ -29,7 +29,7 @@ document.getElementById('book-form').addEventListener('submit', (e) => {
     userInterface.showToast('Please fill in all fields!');
   } else {
     // instantiate Book for adding
-    const newBook = new book.Book(title, author, isbn);
+    const newBook = new book.Book(title, author, isbn, true);
 
     // Send ipc with to mainWindow so new book gets immediately rendered on page
     ipcRenderer.send('book:add', newBook);

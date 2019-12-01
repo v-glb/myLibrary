@@ -21,6 +21,12 @@ class UI {
             <td id="title">${book.title}</td>
             <td id="author">${book.author}</td>
             <td id="isbn">${book.isbn}</td>
+            <td id="available">
+              
+              ${book.available === true ? '<input type="checkbox" id="book-avail-check" checked="checked" />' : '<input type="checkbox" id="book-avail-check" />'} 
+              <span class="available"></span>
+
+            </td>
             <td id="edit">
               <a id="edit-button" class="waves-effect waves-light btn edit">edit</a>
             </td>
@@ -74,7 +80,8 @@ class UI {
   }
 
   updateLentBooks() {
-    // TODO: Display books which are lent
+    const lentBooks = storage.getLentBooks();
+    document.getElementById('lent-books-counter').innerHTML = lentBooks;
   }
 
   updateRecentlyAddedBooks() {

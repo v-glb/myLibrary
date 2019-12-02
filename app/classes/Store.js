@@ -46,6 +46,7 @@ class Store {
 
   editBook(oldIsbn, title, author, newIsbn) {
     const books = this.getBooks();
+    // Grab the book via index in localStorage that needs to be edited
     const bookIndex = this.getIndexOfBook(oldIsbn);
 
     books[bookIndex].title = title;
@@ -71,6 +72,13 @@ class Store {
     }
 
     return bookIndex;
+  }
+
+  getSpecificBook(isbn) {
+    const books = this.getBooks();
+    const bookIndex = this.getIndexOfBook(isbn);
+
+    return books[bookIndex];
   }
 
   getRecentlyAddedBooks(numberOfBooks) {

@@ -15,6 +15,7 @@ let oldIsbn;
 
 // EVENT LISTENERS
 
+// Handle book information editing
 document.getElementById('book-form').addEventListener('submit', e => {
     // Prevent actual submit
     e.preventDefault();
@@ -35,6 +36,11 @@ document.getElementById('book-form').addEventListener('submit', e => {
     }
 });
 
+// Handle book availability editing via checkbox
+document.getElementById('book-avail-check').addEventListener('change', e => {
+    storage.toggleBookAvailability(oldIsbn);
+});
+
 // Close window with ESCAPE key
 window.onkeydown = e => {
     if (event.keyCode == 27) {
@@ -52,4 +58,10 @@ ipcRenderer.on('book:edit', (e, title, author, isbn) => {
 
     // Handle case if isbn gets edited
     oldIsbn = document.getElementById('isbn').value;
+
+    // Handle checkbox availability on windows load
+    const book = storage.getSpecificBook(oldIsbn);
+    const checkbox = document.getElementById('book-avail-check');
+
+    book.available === true ? checkbox.checked = true : checkbox.checked = false;
 });

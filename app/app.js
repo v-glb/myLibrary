@@ -83,16 +83,7 @@ document.getElementById('book-list').addEventListener('click', e => {
 
     ipcRenderer.send('book:edit', title, author, isbn);
 
-    // Toggle book availabilty
-  } else if (e.target.classList.contains('available')) {
-    const isbn = e.target.parentElement.previousElementSibling.textContent;
-
-    storage.toggleBookAvailability(isbn);
-
-    // Update UI
-    userInterface.displayBooks();
-    userInterface.updateLentBooks();
-
+    // Error handling (click on empty space in tr)
   } else {
     // TODO: Implement proper error handling when clicking on whitespace in tr
 
@@ -124,7 +115,10 @@ ipcRenderer.on('book:add', (e, newBook) => {
 ipcRenderer.on('book:editDone', e => {
   userInterface.showToast('Book edited!');
 
+  userInterface.updateRecentlyAddedBooks(5);
+
+  userInterface.updateLentBooks();
+
   userInterface.displayBooks();
 
-  userInterface.updateRecentlyAddedBooks(5);
 });

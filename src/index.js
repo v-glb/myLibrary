@@ -64,8 +64,7 @@ app.on('activate', () => {
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
 
-// Handle creation  of addBookWindow
-
+// Small borderless window for adding new books
 function createAddBookWindow() {
   // Create the browser window.
   addBookWindow = new BrowserWindow({
@@ -83,6 +82,7 @@ function createAddBookWindow() {
   addBookWindow.on('closed', () => addBookWindow = null);
 }
 
+// Small borderless window for editing existing books
 function createEditBookWindow() {
   editBookWindow = new BrowserWindow({
     width: 600,
@@ -97,7 +97,6 @@ function createEditBookWindow() {
 
   // Dereference / Garbage Collection of addBookWindow on close
   editBookWindow.on('closed', () => editBookWindow = null);
-
 }
 
 
@@ -107,18 +106,22 @@ function createEditBookWindow() {
 //
 // ###################################################################
 
+
+// Send newly created book to mainWindow for rendering
 ipcMain.on('book:add', (e, newBook) => {
   mainWindow.webContents.send('book:add', newBook);
   addBookWindow.close();
 });
 
+// Initiate book editing process
 ipcMain.on('book:edit', (e, title, author, isbn) => {
   createEditBookWindow();
 
-  // Time needed for creating the edit window before we can send contents there
+  // Time needed for creating the edit window before we can send book info there
   setTimeout(() => { editBookWindow.webContents.send('book:edit', title, author, isbn); }, 400);
 });
 
+// Send finished book editing to mainWindow for rendering the new info
 ipcMain.on('book:editDone', e => {
   mainWindow.webContents.send('book:editDone');
   editBookWindow.close();
@@ -158,7 +161,7 @@ if (process.platform === 'darwin') {
   menuTemplate.unshift({});
 }
 
-// Check if we're in prod or dev mode for toggling dev tools
+// Check if we're in prod or dev mode for toggling dev tools visibility
 if (process.env.NODE_ENV !== 'production') {
   menuTemplate.push({
     label: 'View',

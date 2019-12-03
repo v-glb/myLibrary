@@ -1,23 +1,27 @@
 const electron = require('electron');
 const { ipcRenderer } = electron;
-const book = require('./classes/Book');
 const store = require('./classes/Store');
 const ui = require('./classes/UI');
 
-// Local Storage for saving books into
+// LocalStorage instance
 const storage = new store.Store();
 
-// UI for showing Toasts
+// UI instance
 const userInterface = new ui.UI();
 
-// Save value of old ISBN so book can be found 
+// Save value of old ISBN so book can be found in case of user wants to
+// edit the ISBN too
 let oldIsbn;
 
-// EVENT LISTENERS
+
+// #################################################################
+//
+//                EVENT LISTENERS HANDLING
+//
+// #################################################################
 
 // Handle book information editing
 document.getElementById('book-form').addEventListener('submit', e => {
-    // Prevent actual submit
     e.preventDefault();
 
     // Get form values
@@ -48,20 +52,27 @@ window.onkeydown = e => {
     }
 };
 
-// IPC HANDLING
+
+// #################################################################
+//
+//                        IPC HANDLING
+//
+// #################################################################
 
 ipcRenderer.on('book:edit', (e, title, author, isbn) => {
-    // Preset input fields with book info that needs to be edited
+    // Preset input fields with book info for editing
     document.getElementById("title").value = title;
     document.getElementById("author").value = author;
     document.getElementById("isbn").value = isbn;
 
-    // Handle case if isbn gets edited
+    // Handle case if isbn gets edited too
     oldIsbn = document.getElementById('isbn').value;
 
-    // Handle checkbox availability on windows load
+    // Determine if checkbox is checked (book is available) or not when window
+    // is created
     const book = storage.getSpecificBook(oldIsbn);
     const checkbox = document.getElementById('book-avail-check');
 
+    // Set checkbox status
     book.available === true ? checkbox.checked = true : checkbox.checked = false;
 });

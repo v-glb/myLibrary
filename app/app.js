@@ -130,6 +130,6 @@ ipcRenderer.on('books:export', e => {
   ipcRenderer.send('books:exportDone', books);
 });
 
-ipcRenderer.on('books:import', e => {
-
+ipcRenderer.on('books:import', (e, importedBooks) => {
+  storage.importBooks(importedBooks);
 });

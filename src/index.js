@@ -100,6 +100,48 @@ function createEditBookWindow() {
   editBookWindow.on('closed', () => editBookWindow = null);
 }
 
+function importBooks() {
+  let importedBooks;
+
+  // Predefined settings for openDialog
+  const options = {
+    title: 'Import books',
+    defaultPath: app.getPath('documents'),
+    filters: [
+      { name: 'txt', extensions: ['txt',] },
+      { name: 'All Files', extensions: ['*'] }
+    ]
+  }
+
+  // Get path for saving exported books
+  let fileName = dialog.showOpenDialog(mainWindow, options) // returns a Promise!
+
+    // Get promise and get filePath from it
+    .then(result => {
+      // Get full path with name of file 
+      fileName = result.filePaths.toString();
+
+      // read file contens with fs
+      fs.readFile(fileName, (err, contents) => {
+        if (err) {
+          console.log('an error ocurred with file creation ' + err.message);
+          return;
+        }
+
+        // Get books from read file
+        importedBooks = contents.toString();
+
+        // Send to renderer process for setting localStorage with file contents
+        mainWindow.webContents.send('books:import', importedBooks);
+      });
+    })
+
+    // Error handling
+    .catch(err => {
+      console.log(err)
+    });
+}
+
 
 // ###################################################################
 // 
@@ -194,7 +236,10 @@ const menuTemplate = [
       {
         label: 'Import Books',
         click() {
-          mainWindow.webContents.send('books:import');
+          // Call function to read file contens and send to renderer process
+          // for setting localStorage
+          importBooks();
+
         }
       },
       {

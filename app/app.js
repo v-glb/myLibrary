@@ -121,3 +121,15 @@ ipcRenderer.on('book:editDone', e => {
   userInterface.updateLentBooks();
   userInterface.displayBooks();
 });
+
+ipcRenderer.on('books:export', e => {
+  // save objects from localStorage to books
+  const books = storage.exportBooks();
+
+  // Send back to mainProcess for launching the save dialog
+  ipcRenderer.send('books:exportDone', books);
+});
+
+ipcRenderer.on('books:import', e => {
+
+});

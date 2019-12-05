@@ -1,4 +1,5 @@
-const { app, BrowserWindow, Menu, ipcMain } = require('electron');
+const { app, BrowserWindow, Menu, ipcMain, dialog } = require('electron');
+const fs = require('fs'); // Write files via node.js
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
@@ -127,6 +128,45 @@ ipcMain.on('book:editDone', e => {
   editBookWindow.close();
 });
 
+// Launch save dialogue when exporting localStorage in Renderer process is done
+ipcMain.on('books:exportDone', (e, books) => {
+  console.log(books);
+
+  // Predefined settings for saving dialogue
+  const options = {
+    title: 'Export books',
+    defaultPath: app.getPath('documents') + '/myLibrary-backup.txt',
+    filters: [
+      { name: 'txt', extensions: ['txt',] },
+      { name: 'All Files', extensions: ['*'] }
+    ]
+  }
+
+  // Get path for saving exported books
+  let fileName = dialog.showSaveDialog(mainWindow, options) // returns a Promise!
+
+    // Get promise and get filePath from it
+    .then(result => {
+      // Get full path with name of file
+      fileName = result.filePath;
+
+      // Actual saving via fs and returned filePath
+      fs.writeFileSync(fileName, books, (err) => {
+        if (err) {
+          console.log('an error ocurred with file creation ' + err.message);
+          return;
+        }
+        console.log('File creation successfully!');
+      });
+
+    })
+
+    // Error handling
+    .catch(err => {
+      console.log(err)
+    })
+});
+
 
 // ###################################################################
 // 
@@ -143,6 +183,18 @@ const menuTemplate = [
         accelerator: process.platform === 'darwin' ? 'Command+N' : 'Ctrl+N',
         click() {
           createAddBookWindow();
+        }
+      },
+      {
+        label: 'Export Books',
+        click() {
+          mainWindow.webContents.send('books:export');
+        }
+      },
+      {
+        label: 'Import Books',
+        click() {
+          mainWindow.webContents.send('books:import');
         }
       },
       {

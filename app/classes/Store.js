@@ -113,6 +113,22 @@ class Store {
     localStorage.setItem('books', JSON.stringify(books));
 
   }
+
+  exportBooks() {
+    // Read all book objects from localStorage and return them as string
+    const books = JSON.stringify(localStorage);
+    return books;
+  }
+
+  importBooks(books) {
+    // Parse passed in String with book objects
+    var booksToImport = JSON.parse(books);
+
+    // Iterate and set each item in localStorage
+    for (let key in booksToImport) {
+      localStorage[key] = booksToImport[key];
+    }
+  }
 }
 
 module.exports.Store = Store;

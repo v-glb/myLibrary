@@ -7,9 +7,25 @@ const userInterface = new ui.UI();
 const storage = new store.Store();
 
 
+// #################################################################
+//
+//                  PAGINATION HANDLING
+//
+// #################################################################
 
+// Init paging layout
+function initPagination() {
+  // Clear pagination from before, needed when performing operations like searching
+  document.getElementById('book-pager').innerHTML = '';
 
-
+  $('#book-table').pageMe({
+    pagerSelector: '#book-pager',
+    activeColor: 'teal',
+    showPrevNext: true,
+    hidePageNumbers: false,
+    perPage: 5
+  });
+}
 
 // #################################################################
 //
@@ -35,6 +51,9 @@ window.addEventListener('DOMContentLoaded', (e) => {
   // Render calendar
   // TODO: Implement calendar!
 
+  // Display pagination based on amount of <tr>
+  initPagination();
+
 });
 
 // Handle search for book
@@ -49,7 +68,12 @@ document.getElementById('search-book-form').addEventListener('submit', e => {
   if (searchPattern === '') {
     userInterface.showToast('Empty input!');
   } else {
+
+    // Update <tr> with matching searchPattern
     userInterface.searchBook(searchPattern);
+
+    // Update pagination
+    initPagination();
   }
 });
 
@@ -110,6 +134,9 @@ ipcRenderer.on('book:add', (e, newBook) => {
   userInterface.updateTotalBooks();
   userInterface.updateRecentlyAddedBooks(5);
   userInterface.displayBooks();
+
+  // Update Pagination
+  initPagination();
 });
 
 ipcRenderer.on('book:editDone', e => {
@@ -120,6 +147,9 @@ ipcRenderer.on('book:editDone', e => {
   userInterface.updateRecentlyAddedBooks(5);
   userInterface.updateLentBooks();
   userInterface.displayBooks();
+
+  // Update pagination
+  initPagination();
 });
 
 ipcRenderer.on('books:export', e => {

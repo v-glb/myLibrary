@@ -108,7 +108,7 @@
 
                 <br>
 
-                <table class="centered highlight responsive-table">
+                <table class="centered highlight responsive-table" id="book-table">
                   <thead>
                     <tr>
                       <th>Title</th>
@@ -121,15 +121,8 @@
                   <tbody id="book-list"></tbody>
                 </table>
 
-                <ul class="pagination">
-                  <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-                  <li class="active waves-effect waves-light teal"><a href="#!">1</a></li>
-                  <li class="waves-effect"><a href="#!">2</a></li>
-                  <li class="waves-effect"><a href="#!">3</a></li>
-                  <li class="waves-effect"><a href="#!">4</a></li>
-                  <li class="waves-effect"><a href="#!">5</a></li>
-                  <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
-                </ul>
+                <!-- Pagination through pagination.js utility -->
+                <ul class="pagination center-align" id="book-pager"></ul>
 
               </div>
             </div>
@@ -176,6 +169,7 @@
   </script>
   <script src="../app/materialize.js"></script>
   <script src="../app/init.js"></script>
+  <script src="../app/pagination.js"></script>
   <script>
     require('../app/app');
   </script>

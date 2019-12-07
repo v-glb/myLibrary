@@ -10,6 +10,32 @@ body {
   background-color: #f7f8fa;
 }
 
+/* Navbar settings */
+
+header,
+main,
+footer {
+  padding-left: 250px;
+}
+
+@media only screen and (max-width : 992px) {
+
+  header,
+  main,
+  footer {
+    padding-left: 0;
+  }
+}
+
+.sidenav {
+  width: 250px !important;
+  background-color: #525a65 !important;
+}
+
+nav a {
+  color: #525a65 !important;
+}
+
 .icon-block {
   padding: 0 15px;
 }
@@ -56,4 +82,8 @@ body {
 /* icon prefix focus color */
 .input-field .prefix.active {
   color: #000;
+}
+
+.container {
+  width: 95% !important;
 }

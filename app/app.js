@@ -116,6 +116,12 @@ document.getElementById('book-list').addEventListener('click', e => {
   }
 });
 
+// Add book via nav bar button
+document.getElementById('add-book').addEventListener('click', e => {
+  // Send to main process for launching the addBook Window
+  ipcRenderer.send('book:new') 
+});
+
 
 // #################################################################
 //

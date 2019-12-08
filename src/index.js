@@ -209,6 +209,11 @@ ipcMain.on('books:exportDone', (e, books) => {
     })
 });
 
+// Create new book via button click in navbar
+ipcMain.on('book:new', e => {
+  createAddBookWindow();
+});
+
 
 // ###################################################################
 // 

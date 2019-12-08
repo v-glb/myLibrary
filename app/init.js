@@ -1,5 +1,6 @@
-(function($){
-  $(function(){
+// Sidenav trigger initialization
+(function ($) {
+  $(function () {
 
     $('.sidenav').sidenav();
 

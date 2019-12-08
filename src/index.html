@@ -14,44 +14,39 @@
 </head>
 
 <body>
+
   <!-- Navigation top bar -->
-  <nav class="white" role="navigation">
-    <div class="nav-wrapper container">
-      <!-- 
-      <a id="logo-container" href="#" class="brand-logo center">myLibrary
-        <i class="large material-icons">menu_book</i>
-      </a>
-      -->
-      <!-- Side menu -->
-      <ul id="slide-out" class="sidenav sidenav-fixed">
+  <header>
 
-        <!-- Side menu header -->
-        <li>
-          <div class="user-view">
-            <div class="background">
-              <img src="../assets/office.jpg">
-            </div>
-            <a href="#user"><img class="circle" src="images/yuna.jpg"></a>
-            <a href="#name"><span class="white-text name">John Doe</span></a>
-            <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>
-          </div>
-        </li>
-
-        <!-- Side menu items -->
-        <li><a href="#!" class="white-text"><i class="material-icons">cloud</i>First Link With Icon</a></li>
-        <li><a href="#!" class="white-text">Second Link</a></li>
-        <li>
-          <div class="divider"></div>
-        </li>
-        <li><a class="subheader white-text">Subheader</a></li>
-        <li><a class="waves-effect white-text" href="#!">Third Link With Waves</a></li>
-
-      </ul>
-      <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-
+    <!-- Make top bar sticky -->
+    <div class="navbar-fixed">
+      <nav class="white" role="navigation">
+        <div class="nav-wrapper container">
+          <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        </div>
+      </nav>
     </div>
-  </nav>
 
+    <!-- Side menu -->
+    <ul id="slide-out" class="sidenav sidenav-fixed">
+
+      <!-- Side menu header -->
+      <br>
+      <li><a id="side-menu-header" class="subheader white-text"><i id="side-menu-header-icon"
+            class="medium material-icons">menu_book</i>myLibrary</a></li>
+      <br>
+
+      <!-- Side menu items / links -->
+      <li>
+        <div class="divider"></div>
+      </li>
+      <li><a class="subheader white-text">Subheader</a></li>
+
+      <li><a href="#!" class="white-text">First Link</a></li>
+      <li><a class="waves-effect white-text" href="#!">Link With Waves</a></li>
+
+    </ul>
+  </header>
 
   <main>
     <div class="container">

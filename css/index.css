@@ -6,11 +6,19 @@
  * Made By MaterializeCSS.com
  */
 
+/* General */
+
 body {
   background-color: #f7f8fa;
 }
 
-/* Navbar settings */
+/* Handle width of contents */
+
+.container {
+  width: 95% !important;
+}
+
+/* Navbar and side menu*/
 
 header,
 main,
@@ -35,6 +43,17 @@ footer {
 nav a {
   color: #525a65 !important;
 }
+
+.nav-fixed {
+  position: fixed;
+  right: 0;
+  left: 0;
+  top: 0;
+  margin-bottom: 0px;
+  z-index: 997;
+}
+
+/* Icons and cards */
 
 .icon-block {
   padding: 0 15px;
@@ -84,6 +103,13 @@ nav a {
   color: #000;
 }
 
-.container {
-  width: 95% !important;
+/* Design of sidemenu */
+
+#side-menu-header {
+  font-size: 25px;
+}
+
+#side-menu-header-icon {
+  margin: 0px 40px 0 0;
+  color: #83bedf;
 }

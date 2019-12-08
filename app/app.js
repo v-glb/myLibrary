@@ -35,6 +35,10 @@ function initPagination() {
 
 // Display book status in cards on first loading of page
 window.addEventListener('DOMContentLoaded', (e) => {
+  // Initialize modal trigger
+  const elems = document.querySelectorAll('.modal');
+  const instances = M.Modal.init(elems);
+
   // Render card showing total books in posession
   userInterface.updateTotalBooks();
 
@@ -119,7 +123,7 @@ document.getElementById('book-list').addEventListener('click', e => {
 // Add book via nav bar button
 document.getElementById('add-book').addEventListener('click', e => {
   // Send to main process for launching the addBook Window
-  ipcRenderer.send('book:new') 
+  ipcRenderer.send('book:new')
 });
 
 

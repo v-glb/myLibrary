@@ -31,7 +31,7 @@ class UI {
               <a id="edit-button" class="waves-effect waves-light btn edit">edit</a>
             </td>
             <td>
-              <a id="delete-button" class="waves-effect waves-light btn red delete">X</a>
+              <a id="delete-button" class="waves-effect waves-light btn red delete modal-trigger">X</a>
             </td>
         `;
 

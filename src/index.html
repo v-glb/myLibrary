@@ -25,7 +25,8 @@
           <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 
           <ul class="left">
-            <li><a id="add-book" class="waves-effect waves-light btn white-text">Add Book<i class="material-icons right">add</i></a></li>
+            <li><a id="add-book" class="waves-effect waves-light btn white-text">Add Book<i
+                  class="material-icons right">add</i></a></li>
           </ul>
 
         </div>
@@ -143,6 +144,19 @@
                       </tr>
                     </thead>
                     <tbody id="book-list"></tbody>
+
+                    <!-- Modal for confirming deletion of book -->
+                    <div id="confirmDelete" class="modal">
+                      <div class="modal-content">
+                        <h4>Delete Book</h4>
+                        <p>Are you sure you want to delete the selected book?</p>
+                      </div>
+                      <div class="modal-footer">
+                        <a href="#!" class="modal-action modal-close waves-effect waves-light btn">Cancel</a>
+                        <a href="#!" class="modal-action modal-close waves-effect waves-light btn">Yes</a>
+                      </div>
+                    </div>
+
                   </table>
 
                   <!-- Pagination through pagination.js utility -->

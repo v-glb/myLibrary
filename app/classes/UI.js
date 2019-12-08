@@ -95,10 +95,10 @@ class UI {
 
     recentBooks.forEach((book) => {
 
-      // Create single list element with class 'collection-item' for each book
+      // Create single list element with class 'collection-item' and book icon for each book
       let li = document.createElement('li');
       li.setAttribute('class', 'collection-item');
-      li.innerHTML = `'${book.title}' by ${book.author}`;
+      li.innerHTML = `<i class="material-icons">book</i> '${book.title}' by ${book.author}`;
 
       // Append list elements to ul
       recentBooksList.appendChild(li);

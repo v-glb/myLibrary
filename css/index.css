@@ -63,6 +63,8 @@ nav a {
   font-size: inherit;
 }
 
+/* Scroll table with books */
+
 .card-scrollable {
   overflow: auto !important;
 }

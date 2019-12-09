@@ -146,14 +146,16 @@
                     <tbody id="book-list"></tbody>
 
                     <!-- Modal for confirming deletion of book -->
-                    <div id="confirmDelete" class="modal">
+                    <div id="confirm-delete" class="modal">
                       <div class="modal-content">
                         <h4>Delete Book</h4>
                         <p>Are you sure you want to delete the selected book?</p>
                       </div>
                       <div class="modal-footer">
-                        <a href="#!" class="modal-action modal-close waves-effect waves-light btn">Cancel</a>
-                        <a href="#!" class="modal-action modal-close waves-effect waves-light btn">Yes</a>
+                        <a href="#!" id="abort-delete-button"
+                          class="modal-action modal-close waves-effect waves-light btn">Cancel</a>
+                        <a href="#!" id="confirm-delete-button"
+                          class="modal-action modal-close waves-effect waves-light btn">Yes</a>
                       </div>
                     </div>
 

@@ -16,7 +16,7 @@ body {
 
 .content {
   visibility: hidden;
-  overflow: auto !important;
+  overflow: hidden !important;
   opacity: 0;
 }
 
@@ -131,8 +131,11 @@ nav a {
   color: #83bedf;
 }
 
-/* About page modal */
+/* About page modal in fullscreen */
 
 #about-page {
-  max-height: 100% !important;
+  max-height: 100%;
+  height: 100%;
+  width: 100%;
+  top: 0% !important;
 }

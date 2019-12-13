@@ -12,6 +12,21 @@ body {
   background-color: #f7f8fa;
 }
 
+/* Handling Main Content with HTML imports */
+
+.content {
+  visibility: hidden;
+  overflow: auto !important;
+  opacity: 0;
+}
+
+.content.is-shown {
+  visibility: visible;
+  opacity: 1;
+}
+
+
+
 /* Handle width of contents */
 
 .container {
@@ -114,4 +129,10 @@ nav a {
 #side-menu-header-icon {
   margin: 0px 40px 0 0;
   color: #83bedf;
+}
+
+/* About page modal */
+
+#about-page {
+  max-height: 100% !important;
 }

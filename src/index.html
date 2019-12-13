@@ -11,6 +11,9 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="../css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
   <link href="../css/index.css" type="text/css" rel="stylesheet" media="screen,projection" />
+
+  <!-- Page templates -->
+  <link rel="import" href="../html/dashboard.html" id="dashboard">
 </head>
 
 <body>
@@ -63,146 +66,32 @@
       </li>
 
       <li>
-        <a class="waves-effect white-text" href="#!">
+        <a class="waves-effect white-text modal-trigger" href="#about-page">
           <i class="material-icons">info_outline</i>
           About
         </a>
-      </li>
 
+      </li>
     </ul>
   </header>
 
-  <main>
-    <div class="container">
-      <div class="section">
+  <!-- About page modal start -->
 
-        <!-- Card Stats start -->
-        <div id="card-stats">
-          <div class="row">
-            <div class="col s4">
-              <div class="card">
-                <div class="card-content white">
-                  <p class="card-stats-title">
-                    <i class="mdi-social-group-add"></i> Books total
-                  </p>
-                  <h4 id="total-books-counter" class="card-stats-number"></h4>
-                </div>
-              </div>
-            </div>
-
-            <div class="col s4">
-              <div class="card">
-                <div class="card-content white">
-                  <p class="card-stats-title">
-                    <i class="mdi-action-trending-up"></i> Books lent
-                  </p>
-                  <h4 id="lent-books-counter" class="card-stats-number">52</h4>
-                </div>
-              </div>
-            </div>
-
-            <div class="col s4">
-              <div class="card">
-                <div class="card-content white">
-                  <p class="card-stats-title">
-                    <i class="mdi-action-trending-up"></i> Borrowers total
-                  </p>
-                  <h4 class="card-stats-number">11</h4>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Card stats end -->
-
-
-        <!-- Card search book start -->
-        <div id="card-book-search">
-          <div class="row">
-            <div class="col s12">
-              <div class="card large">
-                <div class="card-content white card-scrollable">
-
-                  <!-- Searching Book -->
-                  <form id="search-book-form">
-                    <div class="input-field form-group">
-                      <input placeholder="Title / Author / ISBN ..." type="text" id="pattern" class="form-control">
-                      <label for="pattern">Search Book</label>
-                    </div>
-                  </form>
-
-                  <br>
-
-                  <table class="highlight responsive-table" id="book-table">
-                    <thead>
-                      <tr>
-                        <th>Title</th>
-                        <th>Author</th>
-                        <th>ISBN</th>
-                        <th>Available</th>
-                        <th></th>
-                      </tr>
-                    </thead>
-                    <tbody id="book-list"></tbody>
-
-                    <!-- Modal for confirming deletion of book -->
-                    <div id="confirm-delete" class="modal">
-                      <div class="modal-content">
-                        <h4>Delete Book</h4>
-                        <p>Are you sure you want to delete the selected book?</p>
-                      </div>
-                      <div class="modal-footer">
-                        <a href="#!" id="abort-delete-button"
-                          class="modal-action modal-close waves-effect waves-light btn">Cancel</a>
-                        <a href="#!" id="confirm-delete-button"
-                          class="modal-action modal-close waves-effect waves-light btn">Yes</a>
-                      </div>
-                    </div>
-
-                  </table>
-
-                  <!-- Pagination through pagination.js utility -->
-                  <ul class="pagination center-align" id="book-pager"></ul>
-
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Card search book end -->
-
-        <!-- Card calendar start -->
-        <div class="row">
-          <div class="col s6">
-            <div class="card">
-              <div class="card-content white">
-                <p class="card-stats-title">
-                  <i class="mdi-social-group-add"></i> Calendar
-                </p>
-
-              </div>
-            </div>
-          </div>
-          <!-- Card calendar end -->
-
-          <!-- Card recently added books start -->
-          <div class="col s6">
-            <div class="card">
-              <div class="card-content white">
-                <p class="card-stats-title">
-                  <i class="mdi-social-group-add"></i> Recently added
-                </p>
-
-                <ul id="recent-books-list" class="collection"></ul>
-              </div>
-            </div>
-          </div>
-          <!-- Card recently added books end-->
-
-        </div>
-      </div>
+  <div id="about-page" class="modal">
+    <div class="modal-content">
+      <h4>Header</h4>
+      <p>Make me fullscreen</p>
     </div>
+  </div>
+
+  <!-- About page modal end -->
+
+  <!-- Main content -->
+  <main id="content" class="content">
+
+    <!-- Inserted content via HTML imports based on user clicking -->
   </main>
+
   <!--  Scripts-->
   <script>
     window.$ = window.jQuery = require('jquery');
@@ -211,8 +100,9 @@
   <script src="../app/init.js"></script>
   <script src="../app/pagination.js"></script>
   <script>
-    require('../app/app');
+    require('../app/imports');
   </script>
+
 </body>
 
 </html>

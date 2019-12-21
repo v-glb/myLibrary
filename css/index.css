@@ -8,21 +8,41 @@
 
 /* General */
 
-body {
+
+html {
+  height: 100%;
+  font-family: 'BlinkMacSystemFont', 'Lucida Grande', 'Segoe UI', Ubuntu, Cantarell, sans-serif;
+
   background-color: #f7f8fa;
 }
 
 /* Handling Main Content with HTML imports */
 
 .content {
-  visibility: hidden;
-  overflow: hidden !important;
-  opacity: 0;
-}
-
-.content.is-shown {
   visibility: visible;
   opacity: 1;
+}
+
+.section-content {
+  visibility: hidden;
+  position: absolute;
+  opacity: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  /* Page transitions */
+  transform: translateX(-20px);
+  transition: visibility 0s .12s linear, opacity .12s ease-in, transform .12s ease-in;
+
+}
+
+.section-content.is-shown {
+  visibility: visible;
+  opacity: 1;
+
+  /* Page transitions */
+  transform: translateX(0);
+  transition: visibility 0s 0s linear, opacity .36s ease-out, transform .36s ease-out;
 }
 
 

@@ -14,6 +14,7 @@
 
   <!-- Page templates -->
   <link rel="import" href="../html/dashboard.html" id="dashboard">
+  <link rel="import" href="../html/about.html" id="about">
 </head>
 
 <body>
@@ -52,21 +53,21 @@
       <li><a class="subheader white-text">Menu</a></li>
 
       <li>
-        <a class="waves-effect white-text" href="#!">
+        <a class="waves-effect white-text" id="dashboard-page" href="#!">
           <i class="material-icons">collections_bookmark</i>
           My Books
         </a>
       </li>
 
       <li>
-        <a class="waves-effect white-text" href="#!">
+        <a class="waves-effect white-text" id="settings-page" href="#!">
           <i class="material-icons">settings</i>
           Settings
         </a>
       </li>
 
       <li>
-        <a class="waves-effect white-text " href="#">
+        <a class="waves-effect white-text" id="about-page" href="#!">
           <i class="material-icons">info_outline</i>
           About
         </a>
@@ -90,7 +91,7 @@
   <script src="../app/init.js"></script>
   <script src="../app/pagination.js"></script>
   <script>
-    require('../app/imports');
+    require('../app/nav');
   </script>
 
 </body>

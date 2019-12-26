@@ -34,6 +34,9 @@ html {
   transform: translateX(-20px);
   transition: visibility 0s .12s linear, opacity .12s ease-in, transform .12s ease-in;
 
+  /* TODO: Fix width in mobile view */
+  width: calc(100% - 250px);
+
 }
 
 .section-content.is-shown {
@@ -153,9 +156,16 @@ nav a {
 
 /* About page modal in fullscreen */
 
-#about-page {
-  max-height: 100%;
-  height: 100%;
-  width: 100%;
-  top: 0% !important;
-}
+/* #about-page { */
+  /* max-height: 100%; */
+  /* height: 100%; */
+  /* width: 100%; */
+  /* top: 0% !important; */
+/* } */
+
+/* #dashboard-section { */
+/* top: 0; */
+/* right: 0; */
+/* bottom: 0; */
+/* left: 0; */
+/* } */

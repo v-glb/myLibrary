@@ -33,8 +33,6 @@ html {
   /* Page transitions */
   transform: translateX(-20px);
   transition: visibility 0s .12s linear, opacity .12s ease-in, transform .12s ease-in;
-
-  /* TODO: Fix width in mobile view */
   width: calc(100% - 250px);
 
 }
@@ -48,7 +46,12 @@ html {
   transition: visibility 0s 0s linear, opacity .36s ease-out, transform .36s ease-out;
 }
 
-
+/* Respect full width with position absolute in mobile view */
+@media only screen and (max-width : 992px) {
+  .section-content {
+    width: 100%;
+  }
+}
 
 /* Handle width of contents */
 
@@ -157,10 +160,10 @@ nav a {
 /* About page modal in fullscreen */
 
 /* #about-page { */
-  /* max-height: 100%; */
-  /* height: 100%; */
-  /* width: 100%; */
-  /* top: 0% !important; */
+/* max-height: 100%; */
+/* height: 100%; */
+/* width: 100%; */
+/* top: 0% !important; */
 /* } */
 
 /* #dashboard-section { */

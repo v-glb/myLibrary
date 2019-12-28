@@ -81,6 +81,16 @@ document.getElementById('search-book-form').addEventListener('submit', e => {
   }
 });
 
+// Reset book search when hitting ESC
+document.getElementById('search-book-form').addEventListener('keydown', e => {
+  if (e.keyCode == 27) {
+    document.getElementById('pattern').value = '';
+    userInterface.displayBooks();
+    initPagination();
+  }
+});
+
+
 // needed for confirm-delete-modal to get passed into eventListener
 let bookUI;
 let bookStorage;

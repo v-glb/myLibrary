@@ -25,16 +25,36 @@
     <!-- Make top bar sticky -->
     <div class="navbar-fixed">
       <nav class="white" role="navigation">
-        <div class="nav-wrapper">
-          <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 
-          <ul class="left">
-            <li><a id="add-book" class="waves-effect waves-light btn white-text">Add Book<i
-                  class="material-icons right">add</i></a></li>
-          </ul>
+        <div class="row">
+          <div class="col s2">
+            <ul class="left">
+              <li>
+                <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+              </li>
+            </ul>
+          </div>
+          <div class="col s7">
+            <form class="search-input" id="search-book-form">
+              <div class="input-field form-group">
+                <input placeholder="" id="pattern" type="search" class="form-control" />
+                <label class="label-icon" for="pattern"><i class="material-icons">search</i></label>
+                <i class="material-icons">close</i>
+              </div>
+            </form>
+          </div>
+          <div class="col s3">
+            <ul class="right">
+              <li><a id="add-book" class="waves-effect waves-light btn white-text">Add Book<i
+                    class="material-icons right">add</i></a></li>
 
+            </ul>
+          </div>
         </div>
-      </nav>
+
+    </div>
+    </nav>
+
     </div>
 
     <!-- Side menu -->
@@ -56,13 +76,6 @@
         <a class="waves-effect white-text" id="dashboard-page" href="#!">
           <i class="material-icons">collections_bookmark</i>
           My Books
-        </a>
-      </li>
-
-      <li class="menu-item">
-        <a class="waves-effect white-text" id="settings-page" href="#!">
-          <i class="material-icons">settings</i>
-          Settings
         </a>
       </li>
 

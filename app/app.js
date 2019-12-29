@@ -151,6 +151,7 @@ document.getElementById('confirm-delete-button').addEventListener('click', e => 
 
   // // Update card stats
   userInterface.updateTotalBooks();
+  userInterface.updateLentBooks();
   userInterface.updateRecentlyAddedBooks(5);
 });
 

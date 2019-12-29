@@ -12,8 +12,16 @@
 html {
   height: 100%;
   font-family: 'BlinkMacSystemFont', 'Lucida Grande', 'Segoe UI', Ubuntu, Cantarell, sans-serif;
-
   background-color: #f7f8fa;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  /* Remove scrollbar space */
+  background: transparent;
+  /* Optional: just make scrollbar invisible */
 }
 
 /* Handling Main Content with HTML imports */
@@ -60,6 +68,13 @@ html {
 }
 
 /* Navbar and side menu*/
+
+@media only screen and (min-width : 993px) {
+
+  nav {
+    width: calc(100% - 250px);
+  }
+}
 
 header,
 main,
@@ -155,4 +170,24 @@ nav a {
 #side-menu-header-icon {
   margin: 0px 40px 0 0;
   color: #83bedf;
+}
+
+
+
+input[id="pattern"] {
+  height: 45px !important;
+  margin-top: 10px;
+  border-radius: 5px;
+}
+
+.search-input {
+  background-color: #82b1ff;
+  height: 45px !important;
+  margin-top: 10px;
+  border-radius: 5px;
+}
+
+nav .input-field label {
+  top: -8px;
+  left: 0;
 }

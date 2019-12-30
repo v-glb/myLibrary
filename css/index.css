@@ -173,11 +173,16 @@ nav a {
 }
 
 
+/* Search Bar */
 
 input[id="pattern"] {
   height: 45px !important;
   margin-top: 10px;
   border-radius: 5px;
+}
+
+i[id="search-close"] {
+  margin-top: -9px;
 }
 
 .search-input {

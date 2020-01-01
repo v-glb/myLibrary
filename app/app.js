@@ -6,6 +6,15 @@ const ui = require('./classes/UI');
 const userInterface = new ui.UI();
 const storage = new store.Store();
 
+// #################################################################
+//
+//                  HTML DOM ELEMENTS
+//
+// #################################################################
+
+
+let searchInput = document.getElementById('pattern');
+
 
 // #################################################################
 //
@@ -66,7 +75,7 @@ document.getElementById('search-book-form').addEventListener('submit', e => {
   e.preventDefault();
 
   // Get search value
-  const searchPattern = document.getElementById('pattern').value;
+  const searchPattern = searchInput.value;
 
   // Validate input
   if (searchPattern === '') {
@@ -84,7 +93,8 @@ document.getElementById('search-book-form').addEventListener('submit', e => {
 // Reset book search when hitting ESC
 document.getElementById('search-book-form').addEventListener('keydown', e => {
   if (e.keyCode == 27) {
-    document.getElementById('pattern').value = '';
+    searchInput.value = '';
+    searchInput.blur();
     userInterface.displayBooks();
     initPagination();
   }

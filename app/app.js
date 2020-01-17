@@ -14,7 +14,12 @@ const storage = new store.Store();
 
 
 let searchInput = document.getElementById('pattern');
-
+let bookPager = document.getElementById('book-pager');
+let searchBookForm = document.getElementById('search-book-form');
+let bookList = document.getElementById('book-list');
+let addBook = document.getElementById('add-book');
+let abortDelete = document.getElementById('abort-delete-button');
+let confirmDelete = document.getElementById('confirm-delete-button');
 
 // #################################################################
 //
@@ -25,7 +30,7 @@ let searchInput = document.getElementById('pattern');
 // Init paging layout
 function initPagination() {
   // Clear pagination from before, needed when performing operations like searching
-  document.getElementById('book-pager').innerHTML = '';
+  bookPager.innerHTML = '';
 
   $('#book-table').pageMe({
     pagerSelector: '#book-pager',
@@ -70,7 +75,7 @@ window.addEventListener('DOMContentLoaded', (e) => {
 });
 
 // Handle search for book
-document.getElementById('search-book-form').addEventListener('submit', e => {
+searchBookForm.addEventListener('submit', e => {
   // Prevent actual submit
   e.preventDefault();
 
@@ -91,7 +96,7 @@ document.getElementById('search-book-form').addEventListener('submit', e => {
 });
 
 // Reset book search when hitting ESC
-document.getElementById('search-book-form').addEventListener('keydown', e => {
+searchBookForm.addEventListener('keydown', e => {
   if (e.keyCode == 27) {
     searchInput.value = '';
     searchInput.blur();
@@ -107,7 +112,7 @@ let bookStorage;
 
 // Handle Book actions: Remove and Edit Book
 // Right now via ugly DOM traversing, needs refactoring in future
-document.getElementById('book-list').addEventListener('click', e => {
+bookList.addEventListener('click', e => {
 
   // Delete book from UI and localStorage
   if (e.target.classList.contains('delete')) {
@@ -139,17 +144,17 @@ document.getElementById('book-list').addEventListener('click', e => {
 });
 
 // Add book via nav bar button
-document.getElementById('add-book').addEventListener('click', e => {
+addBook.addEventListener('click', e => {
   // Send to main process for launching the addBook Window
   ipcRenderer.send('book:new')
 });
 
 // Confirm delete of book via modal dialog
-document.getElementById('abort-delete-button').addEventListener('click', e => {
+abortDelete.addEventListener('click', e => {
   // Do nothing
 });
 
-document.getElementById('confirm-delete-button').addEventListener('click', e => {
+confirmDelete.addEventListener('click', e => {
   // Remove Book from UI
   userInterface.deleteBook(bookUI);
 

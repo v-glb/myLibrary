@@ -11,8 +11,8 @@ appendTemplatesToDOM(links);
 
 // Set dashboard as initial page on app start
 // TODO: Uncomment this!
-// let dashboard = document.getElementById('dashboard-section');
-let dashboard = document.getElementById('about-section');
+let dashboard = document.getElementById('dashboard-section');
+// let dashboard = document.getElementById('about-section');
 dashboard.classList.add('is-shown');
 
 

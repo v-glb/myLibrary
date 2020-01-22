@@ -74,7 +74,7 @@ menuItems.forEach((el) => {
   el.addEventListener('click', e => {
 
     // Remove highlight from previous element
-    let currentActive = document.querySelector('.active');
+    let currentActive = document.querySelector('li.active'); // Get only active list element!
     currentActive.classList.remove('active');
 
     // Add highlight to clicked element

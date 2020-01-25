@@ -74,6 +74,14 @@ window.addEventListener('DOMContentLoaded', (e) => {
 
 });
 
+// Highlight Search form with ctrl+f for quick access
+window.addEventListener('keydown', e => {
+  if (e.ctrlKey && e.key === 'f') {
+    searchInput.focus();
+  }
+});
+
+
 // Handle search for book
 searchBookForm.addEventListener('submit', e => {
   // Prevent actual submit
@@ -104,6 +112,7 @@ searchBookForm.addEventListener('keydown', e => {
     initPagination();
   }
 });
+
 
 
 // needed for confirm-delete-modal to get passed into eventListener

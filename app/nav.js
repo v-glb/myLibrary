@@ -57,13 +57,22 @@ document.getElementById('about-page').addEventListener('click', e => {
 
   hideSections()
   document.getElementById('about-section').classList.add('is-shown')
+
+  // Disable search and add book functionality when viewing about page
+  document.getElementById('pattern').disabled = true;
+  document.getElementById('add-book').classList.add('disabled');
 });
 
 
 document.getElementById('dashboard-page').addEventListener('click', e => {
 
   hideSections()
-  document.getElementById('dashboard-section').classList.add('is-shown')
+  document.getElementById('dashboard-section').classList.add('is-shown');
+
+
+  // Enable search and add book functionality when viewing main page
+  document.getElementById('pattern').disabled = false;
+  document.getElementById('add-book').classList.remove('disabled');
 });
 
 // Highlight active page in side menu

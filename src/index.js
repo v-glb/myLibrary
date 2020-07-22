@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Menu, ipcMain, dialog } = require('electron');
+const { app, BrowserWindow, Menu, ipcMain, dialog, screen } = require('electron');
 const fs = require('fs'); // Write files via node.js
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -73,7 +73,17 @@ function createAddBookWindow() {
     height: 400,
     title: 'Add New Book',
     frame: false,
+    x: screen.getDisplayNearestPoint(screen.getCursorScreenPoint()).bounds.x,
+    y: screen.getDisplayNearestPoint(screen.getCursorScreenPoint()).bounds.y,
+    show: false,
     webPreferences: { nodeIntegration: true }
+  });
+
+  addBookWindow.center();
+
+  // Prevent ugly visual flash because when creating the window
+  addBookWindow.once('ready-to-show', () => {
+    addBookWindow.show();
   });
 
   // and load the index.html of the app.
@@ -90,8 +100,20 @@ function createEditBookWindow() {
     height: 400,
     title: 'Edit Book',
     frame: false,
+    x: screen.getDisplayNearestPoint(screen.getCursorScreenPoint()).bounds.x,
+    y: screen.getDisplayNearestPoint(screen.getCursorScreenPoint()).bounds.y,
+    show: false,
     webPreferences: { nodeIntegration: true }
   });
+
+  editBookWindow.center();
+
+  // Prevent ugly visual flash because when creating the window
+  editBookWindow.once('ready-to-show', () => {
+    editBookWindow.show();
+  });
+
+
 
   // and load the index.html of the app.
   editBookWindow.loadURL(`file://${__dirname}/../html/editBook.html`);

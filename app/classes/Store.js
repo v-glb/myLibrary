@@ -107,11 +107,18 @@ class Store {
     const books = this.getBooks();
     const bookIndex = this.getIndexOfBook(isbn);
 
-    books[bookIndex].available === true ? books[bookIndex].available = false :
+    if (books[bookIndex].available === true) {
+      books[bookIndex].available = false
+      localStorage.setItem('books', JSON.stringify(books));
+
+      return false;
+
+    } else {
       books[bookIndex].available = true;
+      localStorage.setItem('books', JSON.stringify(books));
 
-    localStorage.setItem('books', JSON.stringify(books));
-
+      return true;
+    }
   }
 
   exportBooks() {

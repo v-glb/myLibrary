@@ -42,7 +42,14 @@ document.getElementById('book-form').addEventListener('submit', e => {
 
 // Handle book availability editing via checkbox
 document.getElementById('book-avail-check').addEventListener('change', e => {
-    storage.toggleBookAvailability(oldIsbn);
+    const available = storage.toggleBookAvailability(oldIsbn);
+
+    if (available) {
+        toggleFormExtend(true);
+    } else {
+        toggleFormExtend(false);
+    }
+
 });
 
 // Close window with ESCAPE key
@@ -51,6 +58,29 @@ window.onkeydown = e => {
         window.close();
     }
 };
+
+// Extend form with additional fields if book is lent to somebody
+function toggleFormExtend(availability) {
+    if (!availability) {
+        // create new form field for entering whom book is lent to
+        const divToAppendTo = document.getElementById('book-avail-check-div');
+        const div = document.createElement('div');
+        div.classList.add('form-group');
+        div.setAttribute("id", 'borrower-div')
+        div.innerHTML = `
+            <p>
+              <label for="lent-to">Borrower</label>
+              <input type="text" id="lent-to" class="form-control">
+            </p>
+        `;
+
+        divToAppendTo.appendChild(div);
+    } else {
+        // remove newly created form fields from DOM
+        document.getElementById('borrower-div').remove();
+    }
+
+}
 
 
 // #################################################################
@@ -74,5 +104,13 @@ ipcRenderer.on('book:edit', (e, title, author, isbn) => {
     const checkbox = document.getElementById('book-avail-check');
 
     // Set checkbox status
-    book.available === true ? checkbox.checked = true : checkbox.checked = false;
+    // book.available === true ? checkbox.checked = true : checkbox.checked = false;
+
+    if(book.available === true) {
+        checkbox.checked = true;
+        toggleFormExtend(true);
+    } else {
+        checkbox.checked = false;
+        toggleFormExtend(false);
+    }
 });

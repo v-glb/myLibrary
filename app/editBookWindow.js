@@ -30,6 +30,9 @@ document.getElementById('book-form').addEventListener('submit', e => {
     const newIsbn = document.getElementById('isbn').value;
 
     // Validate form input
+    if (storage.getBookAvailability(oldIsbn)) {
+        //TODO: Validating for new form fields when book is not available
+    }
     if (title === '' || author === '' || isbn === '') {
         userInterface.showToast('Please fill in all fields!');
     } else {
@@ -73,8 +76,22 @@ function toggleFormExtend(availability) {
               <input type="text" id="lent-to" class="form-control">
             </p>
         `;
-
         divToAppendTo.appendChild(div);
+
+        // Create datepicker for selecting due date
+        const input = document.createElement("input");
+        input.setAttribute("type", "text");
+        input.setAttribute("class", "datepicker");
+        input.setAttribute("id", "due-date");
+
+        const label = document.createElement('label');
+        label.setAttribute('class', 'active')
+        label.setAttribute('for', 'due-date')
+        label.innerHTML = 'Due Date';
+
+        div.appendChild(label);
+        div.appendChild(input);
+
     } else {
         // remove newly created form fields from DOM
         document.getElementById('borrower-div').remove();
@@ -106,11 +123,14 @@ ipcRenderer.on('book:edit', (e, title, author, isbn) => {
     // Set checkbox status
     // book.available === true ? checkbox.checked = true : checkbox.checked = false;
 
-    if(book.available === true) {
+    if (book.available === true) {
         checkbox.checked = true;
         toggleFormExtend(true);
     } else {
         checkbox.checked = false;
         toggleFormExtend(false);
+        var elems = document.querySelectorAll('.datepicker');
+        console.log(elems);
+        var instances = M.Datepicker.init(elems);
     }
 });

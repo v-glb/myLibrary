@@ -1,4 +1,9 @@
 class Store {
+  getBookAvailability(isbn) {
+    const book = this.getSpecificBook(isbn);
+    return (book.available ? true : false);
+  }
+
   getBooks() {
     let books;
 
@@ -48,6 +53,8 @@ class Store {
     const books = this.getBooks();
     // Grab the book via index in localStorage that needs to be edited
     const bookIndex = this.getIndexOfBook(oldIsbn);
+
+    console.log(oldIsbn);
 
     books[bookIndex].title = title;
     books[bookIndex].author = author;

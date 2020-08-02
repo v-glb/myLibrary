@@ -21,6 +21,7 @@ class UI {
             <td id="title">${book.title}</td>
             <td id="author">${book.author}</td>
             <td id="isbn">${book.isbn}</td>
+            <td id="comment">${book.comment}</td>
             <td id="available">
               
               ${book.available === true ? '<input type="checkbox" id="book-avail-check" checked="checked" />' : '<input type="checkbox" id="book-avail-check" />'} 

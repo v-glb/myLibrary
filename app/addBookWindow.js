@@ -22,13 +22,14 @@ document.getElementById('book-form').addEventListener('submit', (e) => {
   const title = document.getElementById('title').value;
   const author = document.getElementById('author').value;
   const isbn = document.getElementById('isbn').value;
+  const comment = document.getElementById('comment').value;
 
   // Validate form input
   if (title === '' || author === '' || isbn === '') {
-    userInterface.showToast('Please fill in all fields!');
+    userInterface.showToast('Please fill in all necessary fields!');
   } else {
     // instantiate Book for adding to UI and saving into localStorage
-    const newBook = new book.Book(title, author, isbn, true);
+    const newBook = new book.Book(title, author, isbn, true, comment);
 
     // Send new book via ipc to mainWindow so it gets rendered on mainWindow 
     ipcRenderer.send('book:add', newBook);

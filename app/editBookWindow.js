@@ -28,12 +28,13 @@ document.getElementById('book-form').addEventListener('submit', e => {
     const title = document.getElementById('title').value;
     const author = document.getElementById('author').value;
     const newIsbn = document.getElementById('isbn').value;
+    const comment = document.getElementById('comment').value;
 
     // Validate form input
     if (title === '' || author === '' || isbn === '') {
-        userInterface.showToast('Please fill in all fields!');
+        userInterface.showToast('Please fill in all necessary fields!');
     } else {
-        storage.editBook(oldIsbn, title, author, newIsbn);
+        storage.editBook(oldIsbn, title, author, newIsbn, comment);
 
         // Send ipc to mainProcess to get this editBookWindow closed after edit
         ipcRenderer.send('book:editDone')
@@ -59,7 +60,7 @@ window.onkeydown = e => {
 //
 // #################################################################
 
-ipcRenderer.on('book:edit', (e, title, author, isbn) => {
+ipcRenderer.on('book:edit', (e, title, author, isbn, comment) => {
     // Preset input fields with book info for editing
     document.getElementById("title").value = title;
     document.getElementById("author").value = author;
@@ -72,6 +73,10 @@ ipcRenderer.on('book:edit', (e, title, author, isbn) => {
     // is created
     const book = storage.getSpecificBook(oldIsbn);
     const checkbox = document.getElementById('book-avail-check');
+
+    // Comment as passed argument via ipcRenderer.send doesn't work, 
+    // so use this as work around. But why?
+    document.getElementById("comment").value = book.comment;
 
     // Set checkbox status
     book.available === true ? checkbox.checked = true : checkbox.checked = false;

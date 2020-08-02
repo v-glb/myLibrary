@@ -44,7 +44,7 @@ class Store {
     localStorage.setItem('books', JSON.stringify(books));
   }
 
-  editBook(oldIsbn, title, author, newIsbn) {
+  editBook(oldIsbn, title, author, newIsbn, comment) {
     const books = this.getBooks();
     // Grab the book via index in localStorage that needs to be edited
     const bookIndex = this.getIndexOfBook(oldIsbn);
@@ -52,6 +52,7 @@ class Store {
     books[bookIndex].title = title;
     books[bookIndex].author = author;
     books[bookIndex].isbn = newIsbn;
+    books[bookIndex].comment = comment;
 
     localStorage.setItem('books', JSON.stringify(books));
   }

@@ -130,7 +130,7 @@ bookList.addEventListener('click', e => {
 
     // LocalStorage book entry to remove
     // Get ISBN from e.target via DOM traversing!
-    bookStorage = e.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.textContent;
+    bookStorage = e.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.textContent;
 
     // Actual delete process in the modal! See modal eventListener
 
@@ -138,11 +138,12 @@ bookList.addEventListener('click', e => {
   } else if (e.target.classList.contains('edit')) {
 
     // Get Book info via DOM traversing to send via ipc
-    const title = e.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.textContent;
-    const author = e.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.textContent;
-    const isbn = e.target.parentElement.previousElementSibling.previousElementSibling.textContent;
+    const title = e.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.textContent;
+    const author = e.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.textContent;
+    const isbn = e.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.textContent;
+    const comment = e.target.parentElement.previousElementSibling.previousElementSibling.textContent;
 
-    ipcRenderer.send('book:edit', title, author, isbn);
+    ipcRenderer.send('book:edit', title, author, isbn, comment);
 
     // Error handling (click on empty space in tr)
   } else {

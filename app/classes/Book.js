@@ -1,9 +1,10 @@
 class Book {
-  constructor(title, author, isbn, available) {
+  constructor(title, author, isbn, available, comment) {
     this.title = title;
     this.author = author;
     this.isbn = isbn;
     this.available = available;
+    this.comment = comment;
   }
 
   getTitle() {
@@ -20,6 +21,10 @@ class Book {
 
   getBookInfo() {
     return `${this.getTitle()} by ${this.getAuthor()}`;
+  }
+
+  getComment() {
+    return this.comment;
   }
 
 }

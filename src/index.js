@@ -97,7 +97,7 @@ function createAddBookWindow() {
 function createEditBookWindow() {
   editBookWindow = new BrowserWindow({
     width: 600,
-    height: 500,
+    height: 400,
     title: 'Edit Book',
     frame: false,
     x: screen.getDisplayNearestPoint(screen.getCursorScreenPoint()).bounds.x,

@@ -1,9 +1,4 @@
 class Store {
-  getBookAvailability(isbn) {
-    const book = this.getSpecificBook(isbn);
-    return (book.available ? true : false);
-  }
-
   getBooks() {
     let books;
 
@@ -53,8 +48,6 @@ class Store {
     const books = this.getBooks();
     // Grab the book via index in localStorage that needs to be edited
     const bookIndex = this.getIndexOfBook(oldIsbn);
-
-    console.log(oldIsbn);
 
     books[bookIndex].title = title;
     books[bookIndex].author = author;
@@ -114,18 +107,11 @@ class Store {
     const books = this.getBooks();
     const bookIndex = this.getIndexOfBook(isbn);
 
-    if (books[bookIndex].available === true) {
-      books[bookIndex].available = false
-      localStorage.setItem('books', JSON.stringify(books));
-
-      return false;
-
-    } else {
+    books[bookIndex].available === true ? books[bookIndex].available = false :
       books[bookIndex].available = true;
-      localStorage.setItem('books', JSON.stringify(books));
 
-      return true;
-    }
+    localStorage.setItem('books', JSON.stringify(books));
+
   }
 
   exportBooks() {

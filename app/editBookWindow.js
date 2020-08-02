@@ -30,9 +30,6 @@ document.getElementById('book-form').addEventListener('submit', e => {
     const newIsbn = document.getElementById('isbn').value;
 
     // Validate form input
-    if (storage.getBookAvailability(oldIsbn)) {
-        //TODO: Validating for new form fields when book is not available
-    }
     if (title === '' || author === '' || isbn === '') {
         userInterface.showToast('Please fill in all fields!');
     } else {
@@ -45,14 +42,7 @@ document.getElementById('book-form').addEventListener('submit', e => {
 
 // Handle book availability editing via checkbox
 document.getElementById('book-avail-check').addEventListener('change', e => {
-    const available = storage.toggleBookAvailability(oldIsbn);
-
-    if (available) {
-        toggleFormExtend(true);
-    } else {
-        toggleFormExtend(false);
-    }
-
+    storage.toggleBookAvailability(oldIsbn);
 });
 
 // Close window with ESCAPE key
@@ -61,43 +51,6 @@ window.onkeydown = e => {
         window.close();
     }
 };
-
-// Extend form with additional fields if book is lent to somebody
-function toggleFormExtend(availability) {
-    if (!availability) {
-        // create new form field for entering whom book is lent to
-        const divToAppendTo = document.getElementById('book-avail-check-div');
-        const div = document.createElement('div');
-        div.classList.add('form-group');
-        div.setAttribute("id", 'borrower-div')
-        div.innerHTML = `
-            <p>
-              <label for="lent-to">Borrower</label>
-              <input type="text" id="lent-to" class="form-control">
-            </p>
-        `;
-        divToAppendTo.appendChild(div);
-
-        // Create datepicker for selecting due date
-        const input = document.createElement("input");
-        input.setAttribute("type", "text");
-        input.setAttribute("class", "datepicker");
-        input.setAttribute("id", "due-date");
-
-        const label = document.createElement('label');
-        label.setAttribute('class', 'active')
-        label.setAttribute('for', 'due-date')
-        label.innerHTML = 'Due Date';
-
-        div.appendChild(label);
-        div.appendChild(input);
-
-    } else {
-        // remove newly created form fields from DOM
-        document.getElementById('borrower-div').remove();
-    }
-
-}
 
 
 // #################################################################
@@ -121,16 +74,5 @@ ipcRenderer.on('book:edit', (e, title, author, isbn) => {
     const checkbox = document.getElementById('book-avail-check');
 
     // Set checkbox status
-    // book.available === true ? checkbox.checked = true : checkbox.checked = false;
-
-    if (book.available === true) {
-        checkbox.checked = true;
-        toggleFormExtend(true);
-    } else {
-        checkbox.checked = false;
-        toggleFormExtend(false);
-        var elems = document.querySelectorAll('.datepicker');
-        console.log(elems);
-        var instances = M.Datepicker.init(elems);
-    }
+    book.available === true ? checkbox.checked = true : checkbox.checked = false;
 });

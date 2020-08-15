@@ -169,7 +169,6 @@ nav a {
 
 #side-menu-header-icon {
   margin: 0px 40px 0 0;
-  color: #83bedf;
 }
 
 
@@ -190,6 +189,7 @@ i[id="search-close"] {
   height: 45px !important;
   margin-top: 10px;
   border-radius: 5px;
+  border-color: #000;
 }
 
 nav .input-field label {
@@ -201,3 +201,29 @@ nav .input-field label {
 input[type="search"]:disabled {
   background-color: #c4c4c4;
 }
+
+/* Custom color for js-calendar */
+tbody td.jsCalendar-current {
+  background-color: #26a69a !important;
+}
+
+/* Dark Mode CSS */
+
+/* html */
+.dark-theme-bg {
+  background-color: #3F4551 !important;
+}
+
+/* .card, .card .large, .navbar-fixed, .collection-item,
+   .jsCalendar table, .modal
+
+*/
+.dark-theme-card-bg {
+  background-color: #525a65 !important;
+}
+
+/* td, i, h4, .card .card-content p, p */
+.dark-theme-font {
+  color: white !important;
+}
+

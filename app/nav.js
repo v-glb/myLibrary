@@ -53,6 +53,7 @@ function hideSections() {
 //
 // #################################################################
 
+// Handle different page templates, wether to be shown/hidden based on user click
 document.getElementById('about-page').addEventListener('click', e => {
 
   hideSections()
@@ -73,6 +74,15 @@ document.getElementById('dashboard-page').addEventListener('click', e => {
   // Enable search and add book functionality when viewing main page
   document.getElementById('pattern').disabled = false;
   document.getElementById('add-book').classList.remove('disabled');
+});
+
+document.getElementById('settings-page').addEventListener('click', e => {
+
+  hideSections()
+  document.getElementById('settings-section').classList.add('is-shown');
+
+  document.getElementById('pattern').disabled = true;
+  document.getElementById('add-book').classList.add('disabled');
 });
 
 // Highlight active page in side menu

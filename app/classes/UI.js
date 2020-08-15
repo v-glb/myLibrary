@@ -17,7 +17,12 @@ class UI {
     const list = document.getElementById('book-list');
 
     const row = document.createElement('tr');
-    row.innerHTML = `
+
+    // TODO: Check if dark mode is enabled or not, to choose proper font color
+    const switchStatus = document.getElementById('dark-mode-switch-status');
+
+    if (!switchStatus.checked) {
+      row.innerHTML = `
             <td id="title">${book.title}</td>
             <td id="author">${book.author}</td>
             <td id="isbn">${book.isbn}</td>
@@ -35,6 +40,28 @@ class UI {
               <a id="delete-button" class="waves-effect waves-light btn red delete modal-trigger" href="#confirm-delete">X</a>
             </td>
         `;
+
+    } else {
+      row.innerHTML = `
+            <td class="dark-theme-font"  id="title">${book.title}</td>
+            <td class="dark-theme-font" id="author">${book.author}</td>
+            <td class="dark-theme-font" id="isbn">${book.isbn}</td>
+            <td class="dark-theme-font" id="comment">${book.comment}</td>
+            <td class="dark-theme-font" id="available">
+              
+              ${book.available === true ? '<input type="checkbox" id="book-avail-check" checked="checked" />' : '<input type="checkbox" id="book-avail-check" />'} 
+              <span class="available"></span>
+
+            </td>
+            <td id="edit">
+              <a id="edit-button" class="waves-effect waves-light btn edit">edit</a>
+            </td>
+            <td>
+              <a id="delete-button" class="waves-effect waves-light btn red delete modal-trigger" href="#confirm-delete">X</a>
+            </td>
+        `;
+
+    }
 
     list.appendChild(row);
   }

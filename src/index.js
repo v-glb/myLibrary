@@ -66,7 +66,7 @@ app.on('activate', () => {
 // code. You can also put them in separate files and import them here.
 
 // Small borderless window for adding new books
-function createAddBookWindow() {
+function createAddBookWindow(darkModeEnabled) {
   // Create the browser window.
   addBookWindow = new BrowserWindow({
     width: 600,
@@ -87,14 +87,15 @@ function createAddBookWindow() {
   });
 
   // and load the index.html of the app.
-  addBookWindow.loadURL(`file://${__dirname}/../html/addBook.html`);
+  darkModeEnabled ? addBookWindow.loadURL(`file://${__dirname}/../html/addBookDark.html`) :
+    addBookWindow.loadURL(`file://${__dirname}/../html/addBook.html`);
 
   // Dereference / Garbage Collection of addBookWindow on close
   addBookWindow.on('closed', () => addBookWindow = null);
 }
 
 // Small borderless window for editing existing books
-function createEditBookWindow() {
+function createEditBookWindow(darkModeEnabled) {
   editBookWindow = new BrowserWindow({
     width: 600,
     height: 500,
@@ -116,7 +117,8 @@ function createEditBookWindow() {
 
 
   // and load the index.html of the app.
-  editBookWindow.loadURL(`file://${__dirname}/../html/editBook.html`);
+  darkModeEnabled ? editBookWindow.loadURL(`file://${__dirname}/../html/editBookDark.html`) :
+    editBookWindow.loadURL(`file://${__dirname}/../html/editBook.html`);
 
   // Dereference / Garbage Collection of addBookWindow on close
   editBookWindow.on('closed', () => editBookWindow = null);
@@ -232,8 +234,8 @@ ipcMain.on('books:exportDone', (e, books) => {
 });
 
 // Create new book via button click in navbar
-ipcMain.on('book:new', e => {
-  createAddBookWindow();
+ipcMain.on('book:new', (e, darkModeEnabled) => {
+  createAddBookWindow(darkModeEnabled);
 });
 
 

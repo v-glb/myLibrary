@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html class="dark-theme-bg" lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Add new Book</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="../css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <link href="../css/index.css" type="text/css" rel="stylesheet" media="screen,projection" />
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="section">
+      <form id="book-form">
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input type="text" id="title" class="form-control dark-theme-font" autofocus>
+        </div>
+
+        <div class="form-group">
+          <label for="author">Author</label>
+          <input type="text" id="author" class="form-control dark-theme-font">
+        </div>
+
+        <div class="form-group">
+          <label for="isbn">ISBN</label>
+          <input type="text" id="isbn" class="form-control dark-theme-font">
+        </div>
+
+        <div class="form-group">
+          <label for="comment">Comment</label>
+          <textarea id="comment" class="materialize-textarea dark-theme-font"></textarea>
+        </div>
+
+
+        <div class="section">
+          <input type="submit" value="Add Book" class="btn">
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    window.$ = window.jQuery = require('jquery');
+  </script>
+  <script src="../app/materialize.js"></script>
+  <script src="../app/init.js"></script>
+  <script>
+    require('../app/classes/Book.js');
+    require('../app/classes/Store.js');
+    require('../app/addBookWindow');
+  </script>
+
+</body>
+
+</html>

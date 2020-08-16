@@ -155,8 +155,9 @@ bookList.addEventListener('click', e => {
 
 // Add book via nav bar button
 addBook.addEventListener('click', e => {
+  const darkModeEnabled = document.getElementById('dark-mode-switch-status').checked;
   // Send to main process for launching the addBook Window
-  ipcRenderer.send('book:new')
+  ipcRenderer.send('book:new', darkModeEnabled);
 });
 
 // Confirm delete of book via modal dialog

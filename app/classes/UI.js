@@ -18,7 +18,6 @@ class UI {
 
     const row = document.createElement('tr');
 
-    // TODO: Check if dark mode is enabled or not, to choose proper font color
     const switchStatus = document.getElementById('dark-mode-switch-status');
 
     if (!switchStatus.checked) {
@@ -124,9 +123,17 @@ class UI {
     recentBooks.forEach((book) => {
 
       // Create single list element with class 'collection-item' and book icon for each book
+      const switchStatus = document.getElementById('dark-mode-switch-status');
+
       let li = document.createElement('li');
-      li.setAttribute('class', 'collection-item');
-      li.innerHTML = `<i class="material-icons">book</i> '${book.title}' by ${book.author}`;
+
+      if (!switchStatus.checked) {
+        li.setAttribute('class', 'collection-item');
+        li.innerHTML = `<i class="material-icons">book</i> '${book.title}' by ${book.author}`;
+      } else {
+        li.setAttribute('class', 'collection-item dark-theme-card-bg dark-theme-font');
+        li.innerHTML = `<i class="material-icons dark-theme-font">book</i> '${book.title}' by ${book.author}`;
+      }
 
       // Append list elements to ul
       recentBooksList.appendChild(li);

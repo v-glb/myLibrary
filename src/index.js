@@ -12,6 +12,9 @@ let mainWindow;
 let addBookWindow;
 let editBookWindow;
 
+// Keep track of current design (light/dark)
+let darkModeActive = false; //light is default
+
 const createWindow = () => {
   // Create the browser window.
   mainWindow = new BrowserWindow({
@@ -173,6 +176,11 @@ function importBooks() {
 //
 // ###################################################################
 
+// Handle toggling between light/dark mode so correctly themed windows get created
+ipcMain.on('design:toggle', e => {
+  darkModeActive ? darkModeActive = false : darkModeActive = true;
+});
+
 
 // Send newly created book to mainWindow for rendering
 ipcMain.on('book:add', (e, newBook) => {
@@ -182,7 +190,7 @@ ipcMain.on('book:add', (e, newBook) => {
 
 // Initiate book editing process
 ipcMain.on('book:edit', (e, title, author, isbn) => {
-  createEditBookWindow();
+  createEditBookWindow(darkModeActive);
 
   // Time needed for creating the edit window before we can send book info there
   setTimeout(() => { editBookWindow.webContents.send('book:edit', title, author, isbn); }, 400);
@@ -234,8 +242,8 @@ ipcMain.on('books:exportDone', (e, books) => {
 });
 
 // Create new book via button click in navbar
-ipcMain.on('book:new', (e, darkModeEnabled) => {
-  createAddBookWindow(darkModeEnabled);
+ipcMain.on('book:new', e => {
+  createAddBookWindow(darkModeActive);
 });
 
 
@@ -253,7 +261,7 @@ const menuTemplate = [
         label: 'New Book',
         accelerator: process.platform === 'darwin' ? 'Command+N' : 'Ctrl+N',
         click() {
-          createAddBookWindow();
+          createAddBookWindow(darkModeActive);
         }
       },
       {

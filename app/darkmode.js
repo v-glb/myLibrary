@@ -4,6 +4,8 @@
 //
 // #################################################################
 
+const { ipcRenderer } = require("electron");
+
 // Apply dark theme based on switch status
 document.getElementById('dark-mode-switch-status').addEventListener('change', e => {
   darkModeToggler();
@@ -62,4 +64,8 @@ function darkModeToggler() {
   h4List.forEach(el => {
     el.classList.toggle('dark-theme-font');
   });
+
+  // Send information about current design to main process so correct windows
+  // get rendered
+  ipcRenderer.send('design:toggle');
 }

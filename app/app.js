@@ -63,11 +63,7 @@ window.addEventListener('DOMContentLoaded', (e) => {
   userInterface.updateRecentlyAddedBooks();
 
   // Display all books
-  // TODO: Render only a part of books so card doesn't look so empty...
   userInterface.displayBooks();
-
-  // Render calendar
-  // TODO: Implement calendar!
 
   // Display pagination based on amount of <tr>
   initPagination();
@@ -146,11 +142,7 @@ bookList.addEventListener('click', e => {
     ipcRenderer.send('book:edit', title, author, isbn, comment);
 
     // Error handling (click on empty space in tr)
-  } else {
-    // TODO: Implement proper error handling when clicking on whitespace in tr
-
-    console.log('error');
-  }
+  } 
 });
 
 // Add book via nav bar button
